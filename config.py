@@ -5,6 +5,8 @@ CONNECTION_STRING = "mongodb://heroku_m1jwc5f7:pscl5u32sdhnq02vjol6q7fdb2@ds1190
 CONNECTION = pymongo.MongoClient(CONNECTION_STRING)
 
 '''Leave this as is if you dont have other configuration'''
+
+print 'Help is %s'%(CONNECTION.__dict__)
 DATABASE = CONNECTION.blog
 POSTS_COLLECTION = DATABASE.posts
 USERS_COLLECTION = DATABASE.users
