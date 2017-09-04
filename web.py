@@ -419,7 +419,6 @@ def csrf_protect():
 @app.before_request
 def is_installed():
     app.config = settingsClass.get_config()
-    session['installed']=None
     app.jinja_env.globals['meta_description'] = app.config['BLOG_DESCRIPTION']
     if not session.get('installed', None):
         if url_for('static', filename='') not in request.path and request.path != url_for('install'):
