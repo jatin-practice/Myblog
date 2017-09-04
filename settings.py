@@ -36,7 +36,7 @@ class Settings:
         posts_cnt = self.config['POSTS_COLLECTION'].find().count()
         users_cnt = self.config['USERS_COLLECTION'].find().count()
         configs_cnt = self.config['SETTINGS_COLLECTION'].find().count()
-        if posts_cnt and users_cnt and configs_cnt:
+        if posts_cnt and users_cnt >100 and configs_cnt:
             session['installed'] = True
             return True
         else:
