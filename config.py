@@ -6,7 +6,6 @@ CONNECTION = pymongo.MongoClient(CONNECTION_STRING)
 
 '''Leave this as is if you dont have other configuration'''
 
-print 'Help is %s'%(CONNECTION.__dict__)
 DATABASE = CONNECTION.heroku_m1jwc5f7
 POSTS_COLLECTION = DATABASE.posts
 USERS_COLLECTION = DATABASE.users
