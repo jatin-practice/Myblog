@@ -30,7 +30,7 @@ def index(page):
     posts = postClass.get_posts(int(app.config['PER_PAGE']), skip)
     count = postClass.get_total_count()
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
-    return render_template('index.html', posts=posts['data'], pagination=pag, meta_title=app.config['BLOG_TITLE'])
+    return render_template('about.html', posts=posts['data'], pagination=pag, meta_title=app.config['BLOG_TITLE'])
 
 
 @app.route('/tag/<tag>', defaults={'page': 1})
