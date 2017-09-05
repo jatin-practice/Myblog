@@ -407,6 +407,10 @@ def install():
                            error_type=error_type,
                            meta_title='Install')
 
+@app.route('/about/')
+def about():
+    """about page"""
+    return render_template('about.html')
 
 @app.before_request
 def csrf_protect():

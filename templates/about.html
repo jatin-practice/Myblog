@@ -1,0 +1,47 @@
+{% set area = 'about' %}
+{% extends "base.html" %}
+{% block title %}About Jatin Rout{% endblock %}
+{% block content %}
+<h1 class="title-with-company">About me</h1>
+<img class="about-portrait img-responsive"
+    src="{{ url_for('static', filename='img/mypic.jpg') }}"
+    alt="Me again"/>
+
+<p class="p-with-company">Dear visitor. My name is Jatin Rout, but many of my
+friends know me as “   ” or just “Jat”. I'm a geek from India living in
+India and working as a software developer  / engineer /
+(put your own name). </p>
+
+<h2>Work, work, work</h2>
+<p>I have a degree (or two) in <a href="https://www.inf.uva.es/en/">Computer Engineering</a> from the
+<a href="https://en.wikipedia.org/wiki/University_of_Valladolid">University of Valladolid</a>.
+Although I truly believe that being professional and helping where you work is more
+important than any title anyone can get.</p>
+
+<p>For the last two years I've been working at
+<a href="http://projectbeagle.com">Project Beagle</a> in the javascript UI, API backend and system operations: everything you need to
+release the <i>kraken</i>. I enjoyed what I did in every area. But one important task in every team I stepped into was to make it a better team: continuous improvment, visibility of what was going on, communication with other teams, etc.</p>
+
+<p>You can get more details from my
+  <a href="https://www.linkedin.com/in/bigdatajatinrout/">
+    Linked In Profile</a>.
+</p>
+
+<h2>Engineering</h2>
+<p>Engineering is more than the technical bits. <b>Teams</b> and <b>Lean</b>. They might
+sound like buzzwords but I find that besides technical challenges, the value of what we
+do plus the people needed to deliver that, are the other two pillars of my day
+to day job.</p>
+
+<p>I couldn't do what I do without the people I work with. Helping a team to
+grow improves the final result and leaves you with motivated people.
+Lean also promotes people (as well as one of the Agile principles). That's why being able
+to serve the best I can the teams I work with is another challenge every day.</p>
+
+
+<p>Also you might find me at the nearest ruby, python, javascript, lean or agile
+meet-up and some times in the <a href="http://hackerspace.gr/">Athens
+hackerspace</a>. I enjoy a lot socializing and learning about your personal experiences in
+those places.</p>
+
+{% endblock %}
