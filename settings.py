@@ -59,7 +59,7 @@ class Settings:
                 [('query', 1), ('orderby', 1)])
             self.config['USERS_COLLECTION'].ensure_index([('date', 1)])
 
-            post_data = {'title': 'Hello World!',
+            post_data = {'title': 'About Blog',
                          'preview': 'This is a pythonic Blog and meant for the python and data analytics update',
                          'body': 'So Guys please update your views',
                          'tags': [],
