@@ -1,12 +1,14 @@
 """
 Individual pages
 """
+from web import *
+
 from flask import (
     Blueprint,
     g,
     render_template)
 
-individual = Blueprint('individual', __name__)
+individual = Blueprint('individual', web.app)
 
 
 @individual.route('/')
