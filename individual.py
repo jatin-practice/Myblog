@@ -7,6 +7,7 @@ from flask import (
     g,
     render_template)
 
+blog = Blueprint('blog', __name__)
 individual = Blueprint('individual', __name__)
 
 

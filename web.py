@@ -18,8 +18,12 @@ from helper_functions import *
 
 #app = Blueprint('FlaskBlog',__name__,template_folder='templates')
 app=Flask(__name__)
+#app.register_blueprint(individual)
+#register_pages(app)
 app.register_blueprint(individual)
 register_pages(app)
+app.register_blueprint(blog, url_prefix='/blog')
+
 md = Markdown(app)
 md.register_extension(GitHubGistExtension)
 md.register_extension(StrikeExtension)
@@ -412,10 +416,6 @@ def install():
                            error_type=error_type,
                            meta_title='Install')
 
-@app.route('/about/')
-def about():
-    """about page"""
-    return render_template('about.html')
 
 @app.before_request
 def csrf_protect():
@@ -467,6 +467,8 @@ if not app.config['DEBUG']:
     app.logger.addHandler(file_handler)
 
 if __name__ == '__main__':
+
+    
     app.config['SERVER_NAME']="127.0.0.1"
     app.run(host=app.config['SERVER_NAME'], port=int(os.environ.get("PORT", 5000)),
             debug=app.config['DEBUG'])
