@@ -6,6 +6,7 @@ from mdx_github_gists import GitHubGistExtension
 from individual import individual
 from mdx_strike import StrikeExtension
 from mdx_quote import QuoteExtension
+from blog_pages import register_pages
 from mdx_code_multiline import MultilineCodeExtension
 from werkzeug.contrib.atom import AtomFeed
 import post
