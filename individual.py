@@ -10,12 +10,12 @@ from flask import (
 blog = Blueprint('blog', __name__)
 individual = Blueprint('individual', __name__)
 
-
+'''
 @individual.route('/')
 def index():
     """main index page"""
     return render_template('index2.html', pages=g.pages.sorted[:3])
-
+'''
 
 @individual.route('/about/')
 def about():
