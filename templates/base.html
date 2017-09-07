@@ -33,12 +33,6 @@
           <li {% if area == 'about' %} class="active"{% endif %}>
             <a href="{{ url_for('individual.about') }}">About</a>
           </li>
-          <li {% if area == 'blog' %} class="active"{% endif %}>
-            <a href="{{ url_for('blog.index') }}">Blog</a>
-          </li>
-          <li>
-            <a href="{{ url_for('feeds.atom') }}"><i class="fa fa-rss"></i></a>
-          </li>
         </ul>
       </nav>
     </div>
