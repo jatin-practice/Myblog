@@ -13,7 +13,7 @@ individual = Blueprint('individual', __name__)
 @individual.route('/')
 def index():
     """main index page"""
-    return render_template('index.html', pages=g.pages.sorted[:3])
+    return render_template('index2.html', pages=g.pages.sorted[:3])
 
 
 @individual.route('/about/')

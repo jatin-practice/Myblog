@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}javier.gr - website of Javier Gonel{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-6">
+    <h1 class="site-title">Javier Gonel</h1>
+    <div class="index-intro">
+      <p> I'm Javier Gonel. I'm a Software Engineer, lean "aficionado" and
+      concurrent programming hobbist who enjoys solving
+      problems using code, cables and some grease.</p>
+      <p>I like to share what I learn because I believe it might be useful for
+someone else. This website serves as a platform to do it and let you know more
+about me.</p>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <img class="img-responsive" alt="It's me!"
+        src="{{ url_for('static', filename='img/index-portrait.jpg') }}" />
+  </div>
+</div>
+
+<div id="content" class="row">
+  <section class="col-sm-6">
+
+<h2>Find me</h2>
+<div class="list-group">
+  <a class="list-group-item" href="https://github.com/graffic">
+    <i class="fa fa-github"></i> Github
+  </a>
+
+  <a class="list-group-item" href="https://twitter.com/graffic">
+    <i class="fa fa-twitter"></i> Twitter: @graffic
+  </a>
+
+  <a class="list-group-item" href="http://stackexchange.com/users/8795/graffic?tab=accounts">
+    <i class="fa fa-stack-exchange"></i> StackExchange
+  </a>
+
+  <a class="list-group-item" href="http://www.linkedin.com/in/javiergonel/en">
+    <i class="fa fa-linkedin"></i> LinkedIn
+  </a>
+  <a class="list-group-item" href="https://www.goodreads.com/user/show/19641577">
+    <b>g</b> Goodreads
+  </a>
+  <a class="list-group-item" href="http://freenode.net/irc_servers.shtml">
+    <b>IRC</b> Freenode "graffic"
+  </a>
+
+  <a class="list-group-item" href="mailto:bolibic@gmail.com">
+    <i class="fa fa-envelope"></i> bolibic@gmail.com
+  </a>
+</div>
+
+  </section><!-- End of column-->
+  <section class="col-sm-6 summary-list">
+    <h2>Lastest blog posts</h2>
+    {% include "article_summary.html" %}
+    <a class="btn btn-primary" href="{{ url_for('blog.index') }}">More ...</a>
+  </section>
+</div><!-- /#content -->
+{% endblock content %}
