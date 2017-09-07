@@ -3,7 +3,7 @@ import os
 from flask import Flask, render_template, abort, url_for, request, flash, session, redirect,Blueprint
 from flaskext.markdown import Markdown
 from mdx_github_gists import GitHubGistExtension
-from individual import individual
+from individual import individual,blog
 from mdx_strike import StrikeExtension
 from mdx_quote import QuoteExtension
 from blog_pages import register_pages
