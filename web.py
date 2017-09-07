@@ -30,7 +30,18 @@ md.register_extension(StrikeExtension)
 md.register_extension(QuoteExtension)
 md.register_extension(MultilineCodeExtension)
 app.config.from_object('config')
+
+
+
+def template_settings():
+    """Extra template globals/context"""
+    return dict(
+        CONTACT_EMAIL='rout.jatin@gmail.com',
+        BASE_URL='http://jatin.kr')
+
 app.context_processor(template_settings)
+
+
 
 @app.route('/', defaults={'page': 1})
 @app.route('/page-<int:page>')
@@ -53,11 +64,6 @@ def posts_by_tag(tag, page):
     pag = pagination.Pagination(page, app.config['PER_PAGE'], count)
     return render_template('index.html', posts=posts['data'], pagination=pag, meta_title='Posts by tag: ' + tag)
 
-def template_settings():
-    """Extra template globals/context"""
-    return dict(
-        CONTACT_EMAIL='bolibic@gmail.com',
-        BASE_URL='http://jatin.kr')
 
 @app.route('/post/<permalink>')
 def single_post(permalink):
