@@ -18,6 +18,7 @@ from helper_functions import *
 #app = Blueprint('FlaskBlog',__name__,template_folder='templates')
 app=Flask(__name__)
 app.register_blueprint(individual)
+register_pages(app)
 md = Markdown(app)
 md.register_extension(GitHubGistExtension)
 md.register_extension(StrikeExtension)
