@@ -1,6 +1,6 @@
 import cgi
 import os
-from flask import Flask, render_template, abort, url_for, request, flash, session, redirect
+from flask import Flask, render_template, abort, url_for, request, flash, session, redirect,Blueprint
 from flaskext.markdown import Markdown
 from mdx_github_gists import GitHubGistExtension
 from mdx_strike import StrikeExtension
@@ -14,7 +14,7 @@ import settings
 from helper_functions import *
 
 
-app = Flask('FlaskBlog')
+app = Blueprint('FlaskBlog',__name__)
 md = Markdown(app)
 md.register_extension(GitHubGistExtension)
 md.register_extension(StrikeExtension)
