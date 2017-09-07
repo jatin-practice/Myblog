@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, abort, url_for, request, flash, session, redirect,Blueprint
 from flaskext.markdown import Markdown
 from mdx_github_gists import GitHubGistExtension
+from individual import individual
 from mdx_strike import StrikeExtension
 from mdx_quote import QuoteExtension
 from mdx_code_multiline import MultilineCodeExtension
@@ -16,6 +17,7 @@ from helper_functions import *
 
 #app = Blueprint('FlaskBlog',__name__,template_folder='templates')
 app=Flask(__name__)
+app.register_blueprint(individual)
 md = Markdown(app)
 md.register_extension(GitHubGistExtension)
 md.register_extension(StrikeExtension)
