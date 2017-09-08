@@ -21,7 +21,7 @@ from analytics import analytics
 app=Flask(__name__)
 #app.register_blueprint(individual)
 #register_pages(app)
-app.register_blueprint(individual)
+app.register_blueprint(analytics)
 register_pages(app)
 app.register_blueprint(blog, url_prefix='/blog')
 app.register_blueprint(individual)
