@@ -11,10 +11,8 @@ from flask import (
     g,
     render_template)
 
-blog = Blueprint('blog', __name__)
 analytics = Blueprint('analytics', __name__)
 
-summary.GET_ALL_DATA = True
 
 urls = [
         'http://www.wired.com/',
