@@ -34,8 +34,8 @@ def analytics_check():
         headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
     with document(title='Analytics') as doc:
         h1('News Summary')
-        print headlines
-        #h2(headlines)
+        #print headlines
+        h2(headlines)
     
     with open('templates/analytics.html', 'w') as f:
         f.write(doc.render())
