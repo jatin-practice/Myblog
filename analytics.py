@@ -5,7 +5,8 @@ Individual pages
 from dominate import document
 from dominate.tags import *
 from pyteaser import SummarizeUrl
-
+import sys
+sys.setdefaultencoding('utf8')
 from flask import (
     Blueprint,
     g,
@@ -36,6 +37,6 @@ def analytics_check():
         h1('News Summary')
         h2(summary)
     with open('templates/analytics.html', 'w') as f:
-        f.write(doc.encode('ascii', 'ignore').render())
+        f.write(doc.render())
     return render_template('analytics.html')
 
