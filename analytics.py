@@ -28,7 +28,7 @@ def index():
 '''
 
 @analytics.route('/analytics/')
-def analytics():
+def analytics_check():
     """about page"""
     for url in urls:
         summary=summaries = SummarizeUrl(url)
