@@ -33,7 +33,7 @@ def analytics_check():
         summary=summaries = SummarizeUrl(url)
     with document(title='Analytics') as doc:
         h1('News Summary')
-        h2(summary.encode('utf-8'))
+        print summary
     
     with open('templates/analytics.html', 'w') as f:
         f.write(doc.render())
