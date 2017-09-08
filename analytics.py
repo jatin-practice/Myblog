@@ -31,7 +31,7 @@ def analytics_check():
     """about page"""
     for url in urls:
         summary=summaries = SummarizeUrl(url)
-        headlines='\n'.join(str(line.encode('utf-8') for line in summary))
+        headlines=','.join(str(line for line in summary))
     with document(title='Analytics') as doc:
         h1('News Summary')
         print headlines
