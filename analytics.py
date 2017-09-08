@@ -30,11 +30,11 @@ def index():
 def analytics_check():
     """about page"""
     for url in urls:
-        summary=summaries = SummarizeUrl(url)
-        headlines=','.join(str(line for line in summary))
+        summaries = SummarizeUrl(url)
+        #headlines=','.join(str(line for line in summaries))
     with document(title='Analytics') as doc:
         h1('News Summary')
-        print headlines
+        print summaries
     
     with open('templates/analytics.html', 'w') as f:
         f.write(doc.render())
