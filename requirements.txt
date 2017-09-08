@@ -3,3 +3,5 @@ flask-markdown
 pymongo==3.0.3
 gunicorn
 flask_flatpages
+dominate
+pyteaser

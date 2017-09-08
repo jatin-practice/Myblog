@@ -15,6 +15,7 @@ import pagination
 import settings
 from helper_functions import *
 
+from analytics import analytics
 
 #app = Blueprint('FlaskBlog',__name__,template_folder='templates')
 app=Flask(__name__)
@@ -23,7 +24,7 @@ app=Flask(__name__)
 app.register_blueprint(individual)
 register_pages(app)
 app.register_blueprint(blog, url_prefix='/blog')
-
+app.register_blueprint(individual)
 md = Markdown(app)
 md.register_extension(GitHubGistExtension)
 md.register_extension(StrikeExtension)
