@@ -5,8 +5,6 @@ Individual pages
 from dominate import document
 from dominate.tags import *
 from pyteaser import SummarizeUrl
-import sys
-sys.setdefaultencoding('utf8')
 from flask import (
     Blueprint,
     g,
