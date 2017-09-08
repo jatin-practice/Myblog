@@ -36,6 +36,6 @@ def analytics_check():
         h1('News Summary')
         h2(summary)
     with open('templates/analytics.html', 'w') as f:
-        f.write(doc.render())
+        f.write(doc.encode('ascii', 'ignore').render())
     return render_template('analytics.html')
 
