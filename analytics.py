@@ -55,11 +55,10 @@ def analytics_check():
         #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
         sentences_dic = fs.get_senteces_ranks(content)
         summary=fs.get_summary(title, content, sentences_dic)
-        headlines.append(content)
+        headlines.append('%s\n'%(content))
     with document(title='Analytics') as doc:
         h1('Title')
         headline='\n'.join(str(line) for line in headlines)
-        print headline
         h2(headline)
     with open('templates/analytics.html', 'w') as f:
         f.write(doc.render())
