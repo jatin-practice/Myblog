@@ -25,7 +25,7 @@ from collections import defaultdict
 from string import punctuation
 import urllib2
 from bs4 import BeautifulSoup
-from summarytool import SummaryTool
+from app.summarytool import SummaryTool
 
 @analytics.route('/')
 def index():
