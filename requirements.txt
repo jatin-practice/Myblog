@@ -6,6 +6,5 @@ flask_flatpages
 dominate
 pyteaser
 bs4
-heapq
 urllib2
 
