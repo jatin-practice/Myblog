@@ -46,7 +46,7 @@ def get_only_text(url):
 @analytics.route('/analytics/')
 def analytics_check():
     """about page"""
-    print "Entering"
+    global SummaryTool
     fs = SummaryTool()
     print "Dict is %s"%(fs.__dict__)
     for url in urls:
