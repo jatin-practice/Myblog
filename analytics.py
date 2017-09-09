@@ -55,8 +55,8 @@ def analytics_check():
     """about page"""
     for url in urls:
         feed_xml = urllib2.urlopen(url).read()
-        print feed_xml
         feed = BeautifulSoup(feed_xml.decode('utf8'))
+        print feed
         to_summarize = map(lambda p: p.text, feed.find_all('guid'))
     for article_url in to_summarize[:5]:
         head1, text = get_only_text(article_url)
