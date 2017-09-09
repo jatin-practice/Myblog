@@ -29,58 +29,104 @@ import urllib2
 from bs4 import BeautifulSoup
 from heapq import nlargest
 
-class FrequencySummarizer:
-  def __init__(self, min_cut=0.1, max_cut=0.9):
-    """
-     Initilize the text summarizer.
-     Words that have a frequency term lower than min_cut 
-     or higer than max_cut will be ignored.
-    """
-    self._min_cut = min_cut
-    self._max_cut = max_cut 
-    self._stopwords = set(stopwords.words('english') + list(punctuation))
+class SummaryTool(object):
 
-  def _compute_frequencies(self, word_sent):
-    """ 
-      Compute the frequency of each of word.
-      Input: 
-       word_sent, a list of sentences already tokenized.
-      Output: 
-       freq, a dictionary where freq[w] is the frequency of w.
-    """
-    freq = defaultdict(int)
-    for s in word_sent:
-      for word in s:
-        if word not in self._stopwords:
-          freq[word] += 1
-    # frequencies normalization and fitering
-    m = float(max(freq.values()))
-    for w in freq.keys():
-      freq[w] = freq[w]/m
-      if freq[w] >= self._max_cut or freq[w] <= self._min_cut:
-        del freq[w]
-    return freq
+    # Naive method for splitting a text into sentences
+    def split_content_to_sentences(self, content):
+        content = content.replace("\n", ". ")
+        return content.split(". ")
 
-  def summarize(self, text, n):
-    """
-      Return a list of n sentences 
-      which represent the summary of text.
-    """
-    sents = sent_tokenize(text)
-    assert n <= len(sents)
-    word_sent = [word_tokenize(s.lower()) for s in sents]
-    self._freq = self._compute_frequencies(word_sent)
-    ranking = defaultdict(int)
-    for i,sent in enumerate(word_sent):
-      for w in sent:
-        if w in self._freq:
-          ranking[i] += self._freq[w]
-    sents_idx = self._rank(ranking, n)    
-    return [sents[j] for j in sents_idx]
+    # Naive method for splitting a text into paragraphs
+    def split_content_to_paragraphs(self, content):
+        return content.split("\n\n")
 
-  def _rank(self, ranking, n):
-    """ return the first n sentences with highest ranking """
-    return nlargest(n, ranking, key=ranking.get)
+    # Caculate the intersection between 2 sentences
+    def sentences_intersection(self, sent1, sent2):
+
+        # split the sentence into words/tokens
+        s1 = set(sent1.split(" "))
+        s2 = set(sent2.split(" "))
+
+        # If there is not intersection, just return 0
+        if (len(s1) + len(s2)) == 0:
+            return 0
+
+        # We normalize the result by the average number of words
+        return len(s1.intersection(s2)) / ((len(s1) + len(s2)) / 2)
+
+    # Format a sentence - remove all non-alphbetic chars from the sentence
+    # We'll use the formatted sentence as a key in our sentences dictionary
+    def format_sentence(self, sentence):
+        sentence = re.sub(r'\W+', '', sentence)
+        return sentence
+
+    # Convert the content into a dictionary <K, V>
+    # k = The formatted sentence
+    # V = The rank of the sentence
+    def get_senteces_ranks(self, content):
+
+        # Split the content into sentences
+        sentences = self.split_content_to_sentences(content)
+
+        # Calculate the intersection of every two sentences
+        n = len(sentences)
+        values = [[0 for x in xrange(n)] for x in xrange(n)]
+        for i in range(0, n):
+            for j in range(0, n):
+                values[i][j] = self.sentences_intersection(sentences[i], sentences[j])
+
+        # Build the sentences dictionary
+        # The score of a sentences is the sum of all its intersection
+        sentences_dic = {}
+        for i in range(0, n):
+            score = 0
+            for j in range(0, n):
+                if i == j:
+                    continue
+                score += values[i][j]
+            sentences_dic[self.format_sentence(sentences[i])] = score
+        return sentences_dic
+
+    # Return the best sentence in a paragraph
+    def get_best_sentence(self, paragraph, sentences_dic):
+
+        # Split the paragraph into sentences
+        sentences = self.split_content_to_sentences(paragraph)
+
+        # Ignore short paragraphs
+        if len(sentences) < 2:
+            return ""
+
+        # Get the best sentence according to the sentences dictionary
+        best_sentence = ""
+        max_value = 0
+        for s in sentences:
+            strip_s = self.format_sentence(s)
+            if strip_s:
+                if sentences_dic[strip_s] > max_value:
+                    max_value = sentences_dic[strip_s]
+                    best_sentence = s
+
+        return best_sentence
+
+    # Build the summary
+    def get_summary(self, title, content, sentences_dic):
+
+        # Split the content into paragraphs
+        paragraphs = self.split_content_to_paragraphs(content)
+
+        # Add the title
+        summary = []
+        summary.append(title.strip())
+        summary.append("")
+
+        # Add the best sentence from each paragraph
+        for p in paragraphs:
+            sentence = self.get_best_sentence(p, sentences_dic).strip()
+            if sentence:
+                summary.append(sentence)
+
+        return ("\n").join(summary)
 
 @analytics.route('/')
 def index():
@@ -101,7 +147,7 @@ def get_only_text(url):
 @analytics.route('/analytics/')
 def analytics_check():
     """about page"""
-    fs = FrequencySummarizer()
+    fs = SummaryTool()
     for url in urls:
         feed_xml = urllib2.urlopen(url).read()
         feed = BeautifulSoup(feed_xml.decode('utf8'))
@@ -109,9 +155,9 @@ def analytics_check():
 
     for article_url in to_summarize[:5]:
         title, text = get_only_text(article_url)
-        for s in fs.summarize(text, 2):
-            #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
-            headlines='\n'.join(str(lines) for line in fs.summarize(text, 2))
+        #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
+        sentences_dic = st.get_senteces_ranks(text)
+        headlines=st.get_summary(title, content, sentences_dic)
         with document(title='Analytics') as doc:
             h1(title)
             #print headlines
