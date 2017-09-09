@@ -59,12 +59,12 @@ def analytics_check():
         to_summarize = map(lambda p: p.text, feed.find_all('guid'))
 
     for article_url in to_summarize[:5]:
-        title, text = get_only_text(article_url)
+        head1, text = get_only_text(article_url)
         #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
         sentences_dic = st.get_senteces_ranks(text)
         headlines=st.get_summary(title, content, sentences_dic)
         with document(title='Analytics') as doc:
-            h1(title)
+            h1(head1)
             #print headlines
             h2(headlines)
     
