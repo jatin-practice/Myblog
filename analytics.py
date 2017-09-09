@@ -46,7 +46,9 @@ def get_only_text(url):
 @analytics.route('/analytics/')
 def analytics_check():
     """about page"""
+    print "Entering"
     fs = SummaryTool()
+    print "Dict is %s"%(fs.__dict__)
     for url in urls:
         feed_xml = urllib2.urlopen(url).read()
         feed = BeautifulSoup(feed_xml.decode('utf8'))
