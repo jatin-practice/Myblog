@@ -49,6 +49,7 @@ def analytics_check():
     for url in urls:
         page = urllib2.urlopen(url).read().decode('utf8')
         soup = BeautifulSoup(page)
+        title='Analytics'
         content = ' '.join(map(lambda p: p.text.encode('ascii', 'ignore'), soup.find_all('p')))
         #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
         sentences_dic = fs.get_senteces_ranks(content)
