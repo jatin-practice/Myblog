@@ -53,16 +53,15 @@ def get_only_text(url):
 def analytics_check():
     """about page"""
     for url in urls:
-        feed_xml = urllib2.urlopen(url).read()
-        feed = BeautifulSoup(feed_xml.decode('utf8'))
-        to_summarize = map(lambda p: p.text, feed.find_all('http'))
-    for article_url in to_summarize[:5]:
-        head1, text = get_only_text(article_url)
+        page = urllib2.urlopen(url).read().decode('utf8')
+        soup = BeautifulSoup(page)
+        text = ' '.join(map(lambda p: p.text, soup.find_all('p')))
+        print 'Text is %s'%(text)
         #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
-        sentences_dic = st.get_senteces_ranks(text)
-        headlines=st.get_summary(title, content, sentences_dic)
+        sentences_dic = fs.get_senteces_ranks(text)
+        headlines=fs.get_summary(title, content, sentences_dic)
         with document(title='Analytics') as doc:
-            h1(head1)
+            h1('Title')
             #print headlines
             h2(headlines)
     
