@@ -60,8 +60,7 @@ def analytics_check():
         h1('Title')
         #print headlines
         h2('\n'.join(str(line) for line in headlines))
-    
         with open('templates/analytics.html', 'w') as f:
-        f.write(doc.render())
+            f.write(doc.render())
     return render_template('analytics.html')
 
