@@ -1,7 +1,6 @@
 import re
-from web import app
 
-class SummaryTool(app):
+class SummaryTool():
 
     # Naive method for splitting a text into sentences
     def split_content_to_sentences(self, content):
