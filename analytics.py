@@ -60,7 +60,7 @@ def analytics_check():
             #print headlines
             h2(headlines)
     
-    with open('templates/analytics.html', 'w') as f:
-        f.write(doc.render())
+            with open('templates/analytics.html', 'w') as f:
+                f.write(doc.render())
     return render_template('analytics.html')
 
