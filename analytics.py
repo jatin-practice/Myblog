@@ -51,11 +51,12 @@ def analytics_check():
         page = urllib2.urlopen(url).read().decode('utf8')
         soup = BeautifulSoup(page)
         title='Analytics'
-        content = ' '.join(map(lambda p: p.text.encode('ascii', 'ignore'), soup.find_all('p')))
+        content = '\n'.join(map(lambda p: p.text.encode('ascii', 'ignore'), soup.find_all('p')))
         #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
         sentences_dic = fs.get_senteces_ranks(content)
         summary=fs.get_summary(title, content, sentences_dic)
-        headlines.append('%s\n'%(content))
+        content=str(content)+'\n'
+        headlines.append(content)
     with document(title='Analytics') as doc:
         h1('Title')
         headline='\n'.join(str(line) for line in headlines)
