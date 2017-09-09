@@ -29,7 +29,7 @@ import urllib2
 from bs4 import BeautifulSoup
 from summarytool import SummaryTool
 
-global fs
+
 fs = SummaryTool()
 
 
@@ -52,6 +52,7 @@ def get_only_text(url):
 @analytics.route('/analytics/')
 def analytics_check():
     """about page"""
+    global fs
     for url in urls:
         page = urllib2.urlopen(url).read().decode('utf8')
         soup = BeautifulSoup(page)
