@@ -32,7 +32,7 @@ from summarytool import SummaryTool
 
 fs = SummaryTool()
 
-
+print 'dict desc %s'%(fs.__dict__)
 @analytics.route('/')
 def index():
     """main index page"""
@@ -53,7 +53,6 @@ def get_only_text(url):
 def analytics_check():
     """about page"""
     global fs
-    print 'dict desc %s'%(fs.__dict__)
     for url in urls:
         page = urllib2.urlopen(url).read().decode('utf8')
         soup = BeautifulSoup(page)
