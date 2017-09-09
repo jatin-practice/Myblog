@@ -5,7 +5,7 @@ gunicorn
 flask_flatpages
 dominate
 pyteaser
-nltk=2.0.1
+nltk==2.0.1
 bs4
 heapq
 urllib2
