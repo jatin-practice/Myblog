@@ -13,6 +13,8 @@ from flask import (
     render_template)
 
 analytics = Blueprint('analytics', __name__)
+from summarytool import SummaryTool
+fs = SummaryTool()
 
 
 urls = [
@@ -24,15 +26,7 @@ urls = [
 '''
 
 from collections import defaultdict
-from string import punctuation
-import urllib2
-from bs4 import BeautifulSoup
-from summarytool import SummaryTool
 
-
-fs = SummaryTool()
-
-print 'dict desc %s'%(fs.__dict__)
 @analytics.route('/')
 def index():
     """main index page"""
@@ -52,7 +46,6 @@ def get_only_text(url):
 @analytics.route('/analytics/')
 def analytics_check():
     """about page"""
-    global fs
     for url in urls:
         page = urllib2.urlopen(url).read().decode('utf8')
         soup = BeautifulSoup(page)
