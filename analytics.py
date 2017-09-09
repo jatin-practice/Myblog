@@ -46,6 +46,7 @@ def get_only_text(url):
 @analytics.route('/analytics/')
 def analytics_check():
     """about page"""
+    headlines=[]
     for url in urls:
         page = urllib2.urlopen(url).read().decode('utf8')
         soup = BeautifulSoup(page)
@@ -53,14 +54,14 @@ def analytics_check():
         content = ' '.join(map(lambda p: p.text.encode('ascii', 'ignore'), soup.find_all('p')))
         #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
         sentences_dic = fs.get_senteces_ranks(content)
-        headlines=fs.get_summary(title, content, sentences_dic)
-        print headlines
-        with document(title='Analytics') as doc:
-            h1('Title')
-            #print headlines
-            h2(headlines)
+        summary=fs.get_summary(title, content, sentences_dic)
+        headlines.append(summary)
+    with document(title='Analytics') as doc:
+        h1('Title')
+        #print headlines
+        h2('\n'.join(str(line) for line in headlines))
     
-            with open('templates/analytics.html', 'w') as f:
-                f.write(doc.render())
+        with open('templates/analytics.html', 'w') as f:
+        f.write(doc.render())
     return render_template('analytics.html')
 
