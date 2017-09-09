@@ -32,7 +32,6 @@ from summarytool import SummaryTool
 global fs
 fs = SummaryTool()
 
-print fs.__dict__
 
 @analytics.route('/')
 def index():
@@ -56,8 +55,7 @@ def analytics_check():
     for url in urls:
         feed_xml = urllib2.urlopen(url).read()
         feed = BeautifulSoup(feed_xml.decode('utf8'))
-        print feed
-        to_summarize = map(lambda p: p.text, feed.find_all('guid'))
+        to_summarize = map(lambda p: p.text, feed.find_all('http'))
     for article_url in to_summarize[:5]:
         head1, text = get_only_text(article_url)
         #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
