@@ -20,7 +20,7 @@ fs = SummaryTool()
 urls = [
         'http://www.wired.com/',
         'http://www.nytimes.com/',
-        'http://www.sambadepaper.com/epapermain.aspx'
+        'http://www.moneycontrol.com'
     ]
 
 '''
