@@ -57,7 +57,7 @@ def analytics_check():
         feed_xml = urllib2.urlopen(url).read()
         feed = BeautifulSoup(feed_xml.decode('utf8'))
         to_summarize = map(lambda p: p.text, feed.find_all('guid'))
-
+        print 'length is %s'%(len(to_summarize))
     for article_url in to_summarize[:5]:
         head1, text = get_only_text(article_url)
         #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
