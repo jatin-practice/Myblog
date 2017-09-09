@@ -4,6 +4,7 @@ Individual pages
 
 from dominate import document
 from dominate.tags import *
+import urllib2
 from pyteaser import SummarizeUrl
 from flask import (
     Blueprint,
