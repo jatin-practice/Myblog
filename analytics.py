@@ -56,6 +56,7 @@ def analytics_check():
         sentences_dic = fs.get_senteces_ranks(content)
         summary=fs.get_summary(title, content, sentences_dic)
         headlines.append(summary)
+        print 'Headline is %s'%('\n'.join(str(line) for line in headlines))
     with document(title='Analytics') as doc:
         h1('Title')
         #print headlines
