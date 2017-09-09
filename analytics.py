@@ -51,7 +51,7 @@ def analytics_check():
         soup = BeautifulSoup(page)
         content = ' '.join(map(lambda p: p.text.encode('ascii', 'ignore'), soup.find_all('p')))
         #headlines='\n'.join(str(line.encode('ascii', 'ignore')) for line in summaries)
-        sentences_dic = fs.get_senteces_ranks(text)
+        sentences_dic = fs.get_senteces_ranks(content)
         headlines=fs.get_summary(title, content, sentences_dic)
         with document(title='Analytics') as doc:
             h1('Title')
